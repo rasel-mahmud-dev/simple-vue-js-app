@@ -13,8 +13,8 @@
             name="name" 
             class="input" type="text" 
             placeholder="Product Name" 
-            v-bind:value="name"  
-            v-on:keydown="handleChange" >
+            v-model="name" 
+            @change="handleChange">
          </div>
 
         <div class="form-control">
@@ -23,9 +23,8 @@
             class="input" 
             type="number"  
             placeholder="Price"
-            v-on:keydown="handleChange"  
-            v-bind:value="price"   
-            >
+            v-model="price" 
+            @change="handleChange">
         </div>
 
 
@@ -48,7 +47,6 @@ import store from '../store'
 export default {
 
   data: function(e){
-    console.log(name);
     return {
       name: "",
       price: "",
@@ -58,13 +56,7 @@ export default {
 
   methods: {
     handleChange(e){
-      console.log(e.target);
-      if(e.target.name === 'name'){
-        this.name = e.target.value
-      } else{
-        this.price = e.target.value
-      }
-        
+      this[e.target.name] = e.target.value
     },
     addProduct(e){
       e.preventDefault()

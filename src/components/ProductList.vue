@@ -12,7 +12,7 @@
         </span>
       </div>
 
-      <li class="product" v-for="product in products" :key="product.name">
+      <li class="product" v-for="product in products" :key="product.id">
         <div class="product_details">
           <span class="product_name">{{ product.name }}</span>
           <span class="product_name">${{ product.price }}</span>
