@@ -14,7 +14,7 @@
             class="input" type="text" 
             placeholder="Product Name" 
             v-model="name" 
-            @change="handleChange">
+            @keydown="handleChange">
          </div>
 
         <div class="form-control">
@@ -24,7 +24,7 @@
             type="number"  
             placeholder="Price"
             v-model="price" 
-            @change="handleChange">
+            @keydown="handleChange">
         </div>
 
 
@@ -56,7 +56,8 @@ export default {
 
   methods: {
     handleChange(e){
-      this[e.target.name] = e.target.value
+      // this[e.target.name] = e.target.value
+      console.log( e.target.value);
     },
     addProduct(e){
       e.preventDefault()
