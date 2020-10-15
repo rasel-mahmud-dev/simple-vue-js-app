@@ -1,0 +1,25 @@
+{
+  "products": [
+    {
+      "name": "M&N T-shart",
+      "price": 12,
+      "id": 1602744509489
+    },
+    {
+      "name": "Laptop",
+      "price": 500,
+      "id": 1602773084548
+    },
+    {
+      "name": "Pen",
+      "price": 1,
+      "id": 1602773092325
+    }
+  ],
+  "cartItems": {
+    "totalPrice": 0,
+    "totalItems": 0,
+    "carts": [],
+    "curr_totalItems": 9
+  }
+}
