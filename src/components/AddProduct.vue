@@ -62,14 +62,11 @@ export default {
     addProduct(e){
       e.preventDefault()
       if(this.name && this.price){
-        store.dispatch("ADD_PRODUCT", {name: this.name, price: this.price})
+        store.dispatch("ADD_PRODUCT", {name: this.name, price: Number(this.price)})
         store.dispatch("ToggleAddProductForm")
       }
     }
   }
-
-
-
 }
 
 
@@ -80,7 +77,6 @@ export default {
 <style lang="scss" scoped>
 
 .addProduct{
-  max-width: 500px;
   margin: auto;
   margin-top: 30px;
 }

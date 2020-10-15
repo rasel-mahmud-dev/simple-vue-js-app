@@ -1,14 +1,19 @@
 
 
 
-
 <template>
   <div class="products_page">
     <ul class="products_wrapper">
       <div class="products_header">
-        <h2>Products  {{products.length}}</h2>
+        <h2 class="product_title">Products total {{products.length}}</h2>
+        <div  @click="toggleAddProduct" class="your-cart">
+          Your Cart: 
+          <strong>{{cartItems.totalItems > 0 ? cartItems.totalItems + " items" : 'Empty' }}</strong>
+          <strong>{{cartItems.totalPrice > 0 ? "$" +cartItems.totalPrice : ''}}</strong> 
+          <i @click="toggleCheckCart" class="fas fa-cart-plus    "></i>
+        </div>
         <span @click="toggleAddProduct" class="addProduct">
-          <i class="fas fa-plus"></i>
+           <i class="far fa-plus"></i>
         </span>
       </div>
 
@@ -21,13 +26,12 @@
           <span class="delete_product"  @click="deleteProduct(product.id)">
             <i class="far fa-trash" aria-hidden="true"></i>
           </span>
-          <span class="addToCart">
+          <span @click="addToCart(product)" class="addToCart">
             <i class="far fa-cart-plus"></i>
           </span>
         </div>
       </li>
 
-      <!-- <button @click="deleteProduct">delete</button> -->
     </ul>
   </div>
 </template>
@@ -39,11 +43,15 @@ import { mapState } from "vuex";
 import store from "../store";
 
 export default {
-  // data() {
-  //   return { p: [{"name": 'Rasel'}] }
-  // },
+
+  mounted: function(){
+    store.dispatch("FETCH_PRODUCTS")
+    store.dispatch("FETCH_CARTS")
+  },
+
   computed: mapState({
     products: (state) => state.products,
+    cartItems: state=>state.cartItems
   }),
 
   methods: {
@@ -55,6 +63,13 @@ export default {
     },
     toggleAddProduct(e){
       store.dispatch("ToggleAddProductForm")
+    },
+
+    toggleCheckCart(e){
+      store.dispatch("ToggleCheckCart")
+    },
+    addToCart: (item)=>{
+      store.dispatch("addToCart", item)
     }
   },
 };
@@ -65,7 +80,9 @@ export default {
 .products_page {
   margin: auto;
 }
-
+.product_title{
+  color: rgb(33, 100, 243);
+}
 .products_header {
   display: flex;
   justify-content: space-between;
@@ -83,7 +100,6 @@ export default {
   list-style: none;
   margin: 0 auto;
   padding: 0;
-  max-width: 500px;
 }
 .product {
   display: flex;
@@ -130,4 +146,14 @@ export default {
     }
   }
 }
+
+.your-cart{
+  cursor: pointer;
+  user-select: none;
+  &:hover{
+    color: rgb(82, 71, 243);
+    font-weight: 500;
+  }
+}
+
 </style>
